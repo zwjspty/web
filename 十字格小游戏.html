@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            display: flex;
+            overflow: hidden;
+            border: 2px solid #8fb2c9;
+            width: 415px;
+            margin: auto;
+            margin-top: 100px;
+        }
+        ul{
+            overflow: hidden;
+            float: left;
+        }
+        li{
+            float: left;
+            list-style: none;
+            height: 100px;
+            width: 100px;
+            border: 2px solid #999;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        
+    </div>
+
+    <script>
+        const div=document.querySelector("div");
+        const ual=`
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        `
+        for(let i=0;i<4;i++){
+            div.insertAdjacentHTML('beforeend',ual);
+        }
+        const uls=document.querySelectorAll("ul");
+        const lis=document.querySelectorAll("li");
+        const liArr=[];
+        
+
+        for(let i=0;i<uls.length;i++){
+            liArr.push(uls[i].querySelectorAll("li"));
+        }
+
+        for(let i=0;i<4;i++){
+            for (let j = 0; j < 4; j++) {
+                liArr[i][j].onmouseover=()=>{
+                    slide(liArr,i,j,"#f00");
+                }
+
+                liArr[i][j].onmouseout=()=>{
+                    slide(liArr,i,j,"");
+                }
+
+                liArr[i][j].onclick=()=>{
+                    myClick(liArr,i,j);
+                }
+            }
+        }
+
+        const slide=(obj,i,j,v)=>{
+            if(obj[i-1])obj[i-1][j].style.borderColor=v;
+            if(obj[i+1])obj[i+1][j].style.borderColor=v;
+            if(obj[i][j+1])obj[i][j+1].style.borderColor=v;
+            if(obj[i][j-1])obj[i][j-1].style.borderColor=v;
+            obj[i][j].style.borderColor=v;
+        }
+
+        const myClick=(obj,i,j)=>{
+            obj[i][j].style.backgroundColor==''?obj[i][j].style.backgroundColor='#10aec2':obj[i][j].style.backgroundColor='';
+            if(obj[i-1])obj[i-1][j].style.backgroundColor==''?obj[i-1][j].style.backgroundColor='#10aec2':obj[i-1][j].style.backgroundColor='';
+            
+            if(obj[i+1])obj[i+1][j].style.backgroundColor==''?obj[i+1][j].style.backgroundColor='#10aec2':obj[i+1][j].style.backgroundColor='';
+            
+            if(obj[i][j-1])obj[i][j-1].style.backgroundColor==''?obj[i][j-1].style.backgroundColor='#10aec2':obj[i][j-1].style.backgroundColor='';
+           
+            if(obj[i][j+1])obj[i][j+1].style.backgroundColor==''?obj[i][j+1].style.backgroundColor='#10aec2':obj[i][j+1].style.backgroundColor='';
+        }
+        
+    </script>
+</body>
+</html>
